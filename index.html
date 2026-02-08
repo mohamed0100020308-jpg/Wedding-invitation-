@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mohamed & Heba Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Noto+Naskh+Arabic:wght@400&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #4A1F24;
+  color: #F6F2EA;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ===== Pages ===== */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ===== Envelope ===== */
+.envelope-container {
+  cursor: pointer;
+}
+
+.envelope {
+  width: 260px;
+  height: 170px;
+  background: #5B2328;
+  position: relative;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 130px solid transparent;
+  border-right: 130px solid transparent;
+  border-top: 85px solid #6A2A30;
+  transform-origin: top;
+  transition: transform 1s ease;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+.envelope-text {
+  margin-top: 20px;
+  letter-spacing: 4px;
+  font-size: 14px;
+}
+
+/* ===== Typography ===== */
+h1 {
+  font-size: 56px;
+  letter-spacing: 8px;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 14px;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-top: 20px;
+}
+
+.ar {
+  font-family: 'Noto Naskh Arabic', serif;
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+
+/* ===== Divider ===== */
+.divider {
+  width: 120px;
+  height: 1px;
+  background: #F6F2EA;
+  margin: 40px 0;
+}
+
+/* ===== Button ===== */
+.btn {
+  margin-top: 30px;
+  padding: 10px 30px;
+  border: 1px solid #F6F2EA;
+  text-decoration: none;
+  color: #F6F2EA;
+  letter-spacing: 4px;
+  font-size: 14px;
+}
+
+/* ===== Countdown ===== */
+#countdown {
+  margin-top: 30px;
+  letter-spacing: 4px;
+  font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Page 1 – Envelope -->
+<section class="page">
+  <div class="envelope-container" onclick="openEnvelope()">
+    <div class="envelope"></div>
+    <div class="envelope-text">OPEN INVITATION</div>
+  </div>
+</section>
+
+<!-- Page 2 – Cover -->
+<section id="cover" class="page">
+  <h4>WEDDING INVITATION</h4>
+  <h1>MOHAMED<br>&<br>HEBA</h1>
+  <p>27 APRIL 2026</p>
+</section>
+
+<!-- Page 3 – Arabic Line -->
+<section class="page">
+  <p class="ar">
+    بكل حب، ندعوكم لمشاركتنا يومًا من أيام العمر
+  </p>
+</section>
+
+<!-- Page 4 – Details -->
+<section class="page">
+  <p class="ar">التاريخ</p>
+  <p class="ar">٢٧ أبريل ٢٠٢٦</p>
+
+  <div class="divider"></div>
+
+  <p class="ar">الزمان</p>
+  <p class="ar">السابعة مساءً</p>
+
+  <div class="divider"></div>
+
+  <p class="ar">المكان</p>
+  <p class="ar">قاعة ريفيرا<br>الإسماعيلية</p>
+</section>
+
+<!-- Page 5 – Countdown -->
+<section class="page">
+  <div id="countdown"></div>
+
+  <a class="btn" href="#" target="_blank">VIEW LOCATION</a>
+
+  <p class="ar" style="margin-top:40px;">
+    حضوركم يُكمل فرحتنا
+  </p>
+</section>
+
+<script>
+function openEnvelope() {
+  document.querySelector('.envelope').classList.add('open');
+  setTimeout(() => {
+    document.getElementById('cover').scrollIntoView({behavior: "smooth"});
+  }, 1200);
+}
+
+/* Countdown */
+const eventDate = new Date("April 27, 2026 19:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = eventDate - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    `${days} DAYS • ${hours} HOURS • ${minutes} MINUTES • ${seconds} SECONDS`;
+}, 1000);
+</script>
+
+</body>
+</html>
